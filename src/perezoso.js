@@ -1,5 +1,5 @@
 /**
- * perezoso 1.0.1
+ * perezoso 1.0.2
  * Repo: https://github.com/roura356a/perezoso
  */
 
