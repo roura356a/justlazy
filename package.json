@@ -3,7 +3,7 @@
   "main": "src/justlazy.js",
   "author": "Alberto Roura",
   "description": "Lightweight javascript plugin to lazy load images. Forked from fhopeman/justlazy",
-  "version": "1.6",
+  "version": "1.6.0",
   "homepage": "https://github.com/roura356a/justlazy",
   "repository": {
     "type": "git",
