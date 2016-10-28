@@ -17,11 +17,6 @@ You can download the latest [release](https://github.com/roura356a/perezoso/rele
 <script src="javascript/perezoso.js" type="text/javascript"></script>
 ```
 
-If you want to use the lazy spinner, following css file is needed:
-```
-<link href="stylesheets/perezoso.css" type="text/css" rel="stylesheet">
-```
-
 ### NPM
 ```
 $ npm install roura356a/perezoso
@@ -44,15 +39,14 @@ Example:
 <span data-src="default/image" data-alt="some alt text"
       data-srcset="small/image 600w, big/image 1000w"
       data-title="some title" data-error-handler="some handler"
-      class="perezoso-placeholder">
+      class="lazyload-placeholder">
 </span>
 ```
-As you can see, the default lazy loading spinner is provided by the `perezoso-placeholder` class.
 
 ### 2. Register event
 There are three possiblities to trigger the lazy loading of the image(s).
 
-The most comfortable one registers an event listener for all placeholders with a specific css class (e.g. `perezoso-placeholder`). The images will be loaded automatically if they become visible. The parameters are the `css-class` as string and optional `options`.
+The most comfortable one registers an event listener for all placeholders with a specific css class (e.g. `lazyload-placeholder`). The images will be loaded automatically if they become visible. The parameters are the `css-class` as string and optional `options`.
 ```
 Perezoso.registerLazyLoadByClass(css-class[, options]);
 ```
