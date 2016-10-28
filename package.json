@@ -1,0 +1,23 @@
+{
+  "name": "justlazy",
+  "main": "src/justlazy.js",
+  "author": "Alberto Roura",
+  "description": "Lightweight javascript plugin to lazy load images. Forked from fhopeman/justlazy",
+  "version": "1.6",
+  "homepage": "https://github.com/roura356a/justlazy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/roura356a/justlazy"
+  },
+  "bugs": {
+    "url": "https://github.com/roura356a/justlazy/issues"
+  },
+  "keywords": [
+    "lazy",
+    "load",
+    "loading",
+    "image",
+    "images"
+  ],
+  "license": "MIT"
+}

@@ -5,15 +5,15 @@
  * Repo: https://github.com/roura356a/justlazy
  */
 (function (root, factory) {
-    if (typeof define === "function" && define.amd) {
+    if (typeof define === 'function' && define.amd) {
         define([], factory);
-    } else if (typeof module === "object" && module.exports) {
+    } else if (typeof module === 'object' && module.exports) {
         module.exports = factory();
     } else {
         root.Justlazy = factory();
     }
 }(this, function () {
-    "use strict";
+    'use strict';
 
     /**
      * Creates an img html node and sets the attributes of the
@@ -26,7 +26,7 @@
      *
      */
     var _createImage = function (imgPlaceholder, imgAttributes, onloadCallback) {
-        var img = document.createElement("img");
+        var img = document.createElement('img');
 
         img.onload = function () {
             if (!!onloadCallback) {
@@ -37,13 +37,13 @@
             img.title = imgAttributes.title;
         }
         if (!!imgAttributes.errorHandler) {
-            img.setAttribute("onerror", imgAttributes.errorHandler);
+            img.setAttribute('onerror', imgAttributes.errorHandler);
         }
         if (!!imgAttributes.srcset) {
-            img.setAttribute("srcset", imgAttributes.srcset);
+            img.setAttribute('srcset', imgAttributes.srcset);
         }
         if (!!imgAttributes.class) {
-            img.setAttribute("class", imgAttributes.class);
+            img.setAttribute('class', imgAttributes.class);
         }
         img.alt = imgAttributes.alt;
         img.src = imgAttributes.src;
@@ -73,12 +73,12 @@
      */
     var _resolveImageAttributes = function (imgPlaceholder) {
         return {
-            src: imgPlaceholder.getAttribute("data-src"),
-            class: imgPlaceholder.getAttribute("data-class"),
-            alt: imgPlaceholder.getAttribute("data-alt"),
-            title: imgPlaceholder.getAttribute("data-title"),
-            errorHandler: imgPlaceholder.getAttribute("data-error-handler"),
-            srcset: imgPlaceholder.getAttribute("data-srcset")
+            src: imgPlaceholder.getAttribute('data-src'),
+            class: imgPlaceholder.getAttribute('data-class'),
+            alt: imgPlaceholder.getAttribute('data-alt'),
+            title: imgPlaceholder.getAttribute('data-title'),
+            errorHandler: imgPlaceholder.getAttribute('data-error-handler'),
+            srcset: imgPlaceholder.getAttribute('data-srcset')
         };
     };
 
@@ -104,7 +104,7 @@
         var imgAttributes = _resolveImageAttributes(imgPlaceholder);
         options = _validateOptions(options);
 
-        if (!!imgAttributes.src && (!!imgAttributes.alt || imgAttributes.alt === "")) {
+        if (!!imgAttributes.src && (!!imgAttributes.alt || imgAttributes.alt === '')) {
             _createImage(imgPlaceholder, imgAttributes, options.onloadCallback);
         } else {
             if (!!options.onerrorCallback) {
@@ -128,7 +128,7 @@
                 if (window.removeEventListener) {
                     window.removeEventListener(e.type, scrollEventCallback, false);
                 } else {
-                    window.detachEvent("on" + e.type, scrollEventCallback);
+                    window.detachEvent('on' + e.type, scrollEventCallback);
                 }
             }
         };
@@ -161,15 +161,15 @@
         } else {
             var loadImgIfVisible = _loadImgIfVisible(imgPlaceholder, validatedOptions);
             if (window.addEventListener) {
-                window.addEventListener("scroll", loadImgIfVisible, false);
+                window.addEventListener('scroll', loadImgIfVisible, false);
             } else {
-                window.attachEvent("onscroll", loadImgIfVisible);
+                window.attachEvent('onscroll', loadImgIfVisible);
             }
         }
     };
 
     var registerLazyLoadByClass = function (imgPlaceholderClass, options) {
-        var placeholders = document.querySelectorAll("." + imgPlaceholderClass);
+        var placeholders = document.querySelectorAll('.' + imgPlaceholderClass);
         for (var i = 0; i < placeholders.length; ++i) {
             Justlazy.registerLazyLoad(placeholders[i], options);
         }
