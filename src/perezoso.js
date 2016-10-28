@@ -1,8 +1,9 @@
 /**
- * justlazy 1.5.2
+ * perezoso 1.0.1
  *
- * From: https://github.com/fhopeman/justlazy
  * Repo: https://github.com/roura356a/justlazy
+ * Forked from original project fhopeman/justlazy
+ *
  */
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -10,7 +11,7 @@
     } else if (typeof module === 'object' && module.exports) {
         module.exports = factory();
     } else {
-        root.Justlazy = factory();
+        root.Perezoso = factory();
     }
 }(this, function () {
     'use strict';
@@ -171,7 +172,7 @@
     var registerLazyLoadByClass = function (imgPlaceholderClass, options) {
         var placeholders = document.querySelectorAll('.' + imgPlaceholderClass);
         for (var i = 0; i < placeholders.length; ++i) {
-            Justlazy.registerLazyLoad(placeholders[i], options);
+            Perezoso.registerLazyLoad(placeholders[i], options);
         }
     };
 

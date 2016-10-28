@@ -1,6 +1,6 @@
-# justlazy.js
+# perezoso.js
 
-Lightweight javascript plugin to lazy load responsive images. Most of the existing javascript plugins using extensive dependencies or supporting just the img-tag without responsive parts. This plugin is supposed to be an alternative. Forked from [fhopeman/justlazy](https://github.com/fhopeman/justlazy).
+Perezoso is a lightweight javascript plugin to lazy load responsive images. Most of the existing javascript plugins using extensive dependencies or supporting just the img-tag without responsive parts. This plugin is supposed to be an alternative. Forked from [fhopeman/justlazy](https://github.com/fhopeman/justlazy).
 
 ## Features
 
@@ -12,19 +12,19 @@ Lightweight javascript plugin to lazy load responsive images. Most of the existi
 ## Installation
 
 ### File include
-You can download the latest [release](https://github.com/roura356a/justlazy/releases) and include the `justlazy.js` file as follows in your page:
+You can download the latest [release](https://github.com/roura356a/perezoso/releases) and include the `perezoso.js` file as follows in your page:
 ```
-<script src="javascript/justlazy.js" type="text/javascript"></script>
+<script src="javascript/perezoso.js" type="text/javascript"></script>
 ```
 
 If you want to use the lazy spinner, following css file is needed:
 ```
-<link href="stylesheets/justlazy.css" type="text/css" rel="stylesheet">
+<link href="stylesheets/perezoso.css" type="text/css" rel="stylesheet">
 ```
 
 ### NPM
 ```
-$ npm install roura356a/justlazy
+$ npm install roura356a/perezoso
 ```
 
 ## Documentation
@@ -44,27 +44,27 @@ Example:
 <span data-src="default/image" data-alt="some alt text"
       data-srcset="small/image 600w, big/image 1000w"
       data-title="some title" data-error-handler="some handler"
-      class="justlazy-placeholder">
+      class="perezoso-placeholder">
 </span>
 ```
-As you can see, the default lazy loading spinner is provided by the `justlazy-placeholder` class.
+As you can see, the default lazy loading spinner is provided by the `perezoso-placeholder` class.
 
 ### 2. Register event
 There are three possiblities to trigger the lazy loading of the image(s).
 
-The most comfortable one registers an event listener for all placeholders with a specific css class (e.g. `justlazy-placeholder`). The images will be loaded automatically if they become visible. The parameters are the `css-class` as string and optional `options`.
+The most comfortable one registers an event listener for all placeholders with a specific css class (e.g. `perezoso-placeholder`). The images will be loaded automatically if they become visible. The parameters are the `css-class` as string and optional `options`.
 ```
-Justlazy.registerLazyLoadByClass(css-class[, options]);
+Perezoso.registerLazyLoadByClass(css-class[, options]);
 ```
 
 If you need more flexibility, the next function accepts as first parameter the html object of the placeholder. So you can decide how to extract the placeholder objects out of the html. The parameters are the `placeholder` as object and `options` if you need them.
 ```
-Justlazy.registerLazyLoad(placeholder[, options]);
+Perezoso.registerLazyLoad(placeholder[, options]);
 ```
 
 The most flexible way is to use the last function, which has to be called manually to load the image. The advantage is, that you can use custom events (e.g. a sliding event of a gallery) to trigger the lazy loading. The parameters are `placeholder` as object and `options`.
 ```
-Justlazy.lazyLoad(placeholder[, options]);
+Perezoso.lazyLoad(placeholder[, options]);
 ```
 
 #### Parameters
@@ -73,7 +73,7 @@ The `css-class` is a string which has to be provided without the class selector 
 
 Example:
 ```
-Justlazy.registerLazyLoadByClass('load-if-visible');
+Perezoso.registerLazyLoadByClass('load-if-visible');
 ```
 
 ##### placeholder
@@ -81,7 +81,7 @@ The `placeholder` has to be provided as plain javascript object.
 
 Example:
 ```
-Justlazy.registerLazyLoad(document.getElementById('placeholder-1'));
+Perezoso.registerLazyLoad(document.getElementById('placeholder-1'));
 ```
 
 ##### options
@@ -94,7 +94,7 @@ The `options` are provided as object with following properties. All of them are 
 
 Example:
 ```
-Justlazy.registerLazyLoadByClass('load-if-visible', {
+Perezoso.registerLazyLoadByClass('load-if-visible', {
     onloadCallback: function() {
         // do something
     },
