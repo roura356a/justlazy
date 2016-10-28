@@ -1,10 +1,10 @@
 /**
  * justlazy 1.5.2
  *
- * Repo: https://github.com/fhopeman/justlazy
- * Demo: http://fhopeman.github.io/justlazy
+ * From: https://github.com/fhopeman/justlazy
+ * Repo: https://github.com/roura356a/justlazy
  */
-(function(root, factory) {
+(function (root, factory) {
     if (typeof define === "function" && define.amd) {
         define([], factory);
     } else if (typeof module === "object" && module.exports) {
@@ -12,7 +12,7 @@
     } else {
         root.Justlazy = factory();
     }
-}(this, function() {
+}(this, function () {
     "use strict";
 
     /**
@@ -25,10 +25,10 @@
      * @param {Function} onloadCallback Optional onload callback function.
      *
      */
-    var _createImage = function(imgPlaceholder, imgAttributes, onloadCallback) {
+    var _createImage = function (imgPlaceholder, imgAttributes, onloadCallback) {
         var img = document.createElement("img");
 
-        img.onload = function() {
+        img.onload = function () {
             if (!!onloadCallback) {
                 onloadCallback.call(img);
             }
@@ -57,7 +57,7 @@
      * @param {Object} imgPlaceholder Image placeholder html node.
      * @param {Object} img Image node itself.
      */
-    var _replacePlaceholderWithImage = function(imgPlaceholder, img) {
+    var _replacePlaceholderWithImage = function (imgPlaceholder, img) {
         var parentNode = imgPlaceholder.parentNode;
         if (!!parentNode) {
             parentNode.replaceChild(img, imgPlaceholder);
@@ -71,7 +71,7 @@
      *
      * @returns {Object} Object with image attributes.
      */
-    var _resolveImageAttributes = function(imgPlaceholder) {
+    var _resolveImageAttributes = function (imgPlaceholder) {
         return {
             src: imgPlaceholder.getAttribute("data-src"),
             class: imgPlaceholder.getAttribute("data-class"),
@@ -82,7 +82,7 @@
         };
     };
 
-    var _validateOptions = function(options) {
+    var _validateOptions = function (options) {
         return options || {};
     };
 
@@ -100,7 +100,7 @@
      *                                 replacement of the lazy placeholder fails (e.g. mandatory
      *                                 attributes missing).
      */
-    var lazyLoad = function(imgPlaceholder, options) {
+    var lazyLoad = function (imgPlaceholder, options) {
         var imgAttributes = _resolveImageAttributes(imgPlaceholder);
         options = _validateOptions(options);
 
@@ -113,15 +113,15 @@
         }
     };
 
-    var _isVisible = function(placeholder, optionalThreshold) {
+    var _isVisible = function (placeholder, optionalThreshold) {
         var windowInnerHeight = window.innerHeight || document.documentElement.clientHeight;
         var threshold = optionalThreshold || 0;
 
         return placeholder.getBoundingClientRect().top - windowInnerHeight <= threshold;
     };
 
-    var _loadImgIfVisible = function(imgPlaceholder, options) {
-        var scrollEventCallback = function(e) {
+    var _loadImgIfVisible = function (imgPlaceholder, options) {
+        var scrollEventCallback = function (e) {
             if (_isVisible(imgPlaceholder, options.threshold)) {
                 lazyLoad(imgPlaceholder, options);
 
@@ -154,7 +154,7 @@
      *                                 The image is loaded the defined pixels before it appears
      *                                 on the screen. E.g. 200px before it become visible.
      */
-    var registerLazyLoad = function(imgPlaceholder, options) {
+    var registerLazyLoad = function (imgPlaceholder, options) {
         var validatedOptions = _validateOptions(options);
         if (_isVisible(imgPlaceholder, validatedOptions.threshold)) {
             lazyLoad(imgPlaceholder, options);
@@ -168,7 +168,7 @@
         }
     };
 
-    var registerLazyLoadByClass = function(imgPlaceholderClass, options) {
+    var registerLazyLoadByClass = function (imgPlaceholderClass, options) {
         var placeholders = document.querySelectorAll("." + imgPlaceholderClass);
         for (var i = 0; i < placeholders.length; ++i) {
             Justlazy.registerLazyLoad(placeholders[i], options);
