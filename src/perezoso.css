@@ -1,16 +1,13 @@
 /**
  * perezoso 1.0.1
- *
- * Repo: https://github.com/roura356a/justlazy
- * Forked from original project fhopeman/justlazy
- *
+ * Repo: https://github.com/roura356a/perezoso
  */
 @keyframes rotate360 {
   from {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
-.justlazy-placeholder {
+.perezoso-placeholder {
   position: relative;
   border: 0.6em solid rgba(255, 255, 255, 0.2);
   border-left-color: #878787;
@@ -19,7 +16,7 @@
   width: 4em;
   height: 4em;
   left: calc(50% - 2em); }
-  .justlazy-placeholder:after {
+  .perezoso-placeholder:after {
     border-radius: 50%;
     width: 4em;
     height: 4em;

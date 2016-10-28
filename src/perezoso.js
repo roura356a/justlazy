@@ -1,10 +1,8 @@
 /**
  * perezoso 1.0.1
- *
- * Repo: https://github.com/roura356a/justlazy
- * Forked from original project fhopeman/justlazy
- *
+ * Repo: https://github.com/roura356a/perezoso
  */
+
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         define([], factory);
