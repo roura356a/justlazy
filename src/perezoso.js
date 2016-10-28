@@ -1,5 +1,5 @@
 /**
- * perezoso 1.0.2
+ * perezoso 1.0.3
  * Repo: https://github.com/roura356a/perezoso
  */
 
@@ -44,6 +44,9 @@
         if (!!imgAttributes.class) {
             img.setAttribute('class', imgAttributes.class);
         }
+        if (!!imgAttributes.sizes) {
+            img.setAttribute('sizes', imgAttributes.sizes);
+        }
         img.alt = imgAttributes.alt;
         img.src = imgAttributes.src;
 
@@ -74,6 +77,7 @@
         return {
             src: imgPlaceholder.getAttribute('data-src'),
             class: imgPlaceholder.getAttribute('data-class'),
+            sizes: imgPlaceholder.getAttribute('data-sizes'),
             alt: imgPlaceholder.getAttribute('data-alt'),
             title: imgPlaceholder.getAttribute('data-title'),
             errorHandler: imgPlaceholder.getAttribute('data-error-handler'),
