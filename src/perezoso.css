@@ -1,45 +1,28 @@
 /**
- * justlazy 1.5.1
+ * perezoso 1.0.1
  *
- * Repo: https://github.com/fhopeman/justlazy
- * Demo: http://fhopeman.github.io/justlazy
+ * Repo: https://github.com/roura356a/justlazy
+ * Forked from original project fhopeman/justlazy
+ *
  */
-@-webkit-keyframes rotate360 {
-    from {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
 @keyframes rotate360 {
-    from {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
 .justlazy-placeholder {
-    position: relative;
-    border-top: 0.6em solid rgba(255, 255, 255, 0.2);
-    border-right: 0.6em solid rgba(255, 255, 255, 0.2);
-    border-bottom: 0.6em solid rgba(255, 255, 255, 0.2);
-    border-left: 0.6em solid #878787;
-    animation: rotate360 1s infinite linear;
-    -webkit-animation: rotate360 1s infinite linear;
-    -moz-animation: rotate360 1s infinite linear;
-    -o-animation: rotate360 1s infinite linear;
-}
-.justlazy-placeholder,
-.justlazy-placeholder:after {
+  position: relative;
+  border: 0.6em solid rgba(255, 255, 255, 0.2);
+  border-left-color: #878787;
+  animation: rotate360 1s infinite linear;
+  border-radius: 50%;
+  width: 4em;
+  height: 4em;
+  left: calc(50% - 2em); }
+  .justlazy-placeholder:after {
     border-radius: 50%;
     width: 4em;
     height: 4em;
-    left: calc(50% - 2em);
-}
+    left: calc(50% - 2em); }
+
+/*# sourceMappingURL=perezoso.css.map */
