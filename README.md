@@ -1,4 +1,4 @@
-# perezoso.js
+# perezoso.js (v1.0.4)
 
 Perezoso is a lightweight javascript plugin to lazy load responsive images forked from [fhopeman/justlazy](https://github.com/fhopeman/justlazy).
 
