@@ -25,25 +25,22 @@ $ npm install roura356a/perezoso
 ```
 
 ## Documentation
-### 1. Define placeholder
+### 1. Define attributes
 
-The placeholder has to be defined in your html. The `data-src` and `data-alt` attributes are mandatory, the rest of them are optional. You can define as many placeholders as you need.
+Anything passed to the placeholder as `data-*` will became an attribute with the same name in the newly generated `img`.
 
-#### Attributes description
-- `data-src`: (mandatory) Source of the image.
-- `data-alt`: (mandatory) Alt text of the image, `data-alt=""` is allowed, but not recommended!
-- `data-class`: Class of the newly generated image.
-- `data-title`: Title of the image.
-- `data-error-handler`: Error handler of the image.
-- `data-srcset`: Responsive image source-set attribute.
 Example:
 ```
-<span data-src="default/image" data-alt="some alt text"
-      data-srcset="small/image 600w, big/image 1000w"
-      data-title="some title" data-error-handler="some handler"
+<span data-src="path-to-image/image.jpg"
+      data-alt="some alt text"
+      data-srcset="path-to-image/image-600.jpg 600w, path-to-image/image-1000.jpg 1000w"
+      data-title="some title"
+      data-class="img-class"
       class="lazyload-placeholder">
 </span>
 ```
+
+Will became `<img src="path-to-image/image.jpg" class="img-class" alt="some alt text" srcset="path-to-image/image-600.jpg 600w, path-to-image/image-1000.jpg 1000w" title="some title">`.
 
 ### 2. Register event
 There are three possiblities to trigger the lazy loading of the image(s).
@@ -56,11 +53,6 @@ Perezoso.registerLazyLoadByClass(css-class[, options]);
 If you need more flexibility, the next function accepts as first parameter the html object of the placeholder. So you can decide how to extract the placeholder objects out of the html. The parameters are the `placeholder` as object and `options` if you need them.
 ```
 Perezoso.registerLazyLoad(placeholder[, options]);
-```
-
-The most flexible way is to use the last function, which has to be called manually to load the image. The advantage is, that you can use custom events (e.g. a sliding event of a gallery) to trigger the lazy loading. The parameters are `placeholder` as object and `options`.
-```
-Perezoso.lazyLoad(placeholder[, options]);
 ```
 
 #### Parameters
@@ -80,23 +72,12 @@ Example:
 Perezoso.registerLazyLoad(document.getElementById('placeholder-1'));
 ```
 
-##### options
-The `options` are provided as object with following properties. All of them are optional and you can provide as many as you need.
-
-###### Properties description
-- `onloadCallback`: The function will be invoked if the placeholder is properly replaced.
-- `onerrorCallback`: The function will be invoked if the placeholder could not be replaced. This occurs if mandatory attributes (e.g. `data-src`) aren't available.
-- `threshold`: The image is loaded the defined pixels before it appears on the screen. E.g. 200px before it becomes visible.
+##### threshold
+The `threshold` option is optional. The image is loaded the defined pixels before it appears on the screen.
 
 Example:
 ```
 Perezoso.registerLazyLoadByClass('load-if-visible', {
-    onloadCallback: function() {
-        // do something
-    },
-    onerrorCallback: function() {
-        // do something
-    },
     threshold: 200
 });
 ```
