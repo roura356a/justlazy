@@ -1,5 +1,5 @@
 /**
- * perezoso 1.0.4
+ * perezoso 1.0.5
  * Repo: https://github.com/roura356a/perezoso
  */
 
@@ -14,8 +14,14 @@
 }(this, function () {
     'use strict';
 
-    var _createImage = function (imgPlaceholder, imgAttributes) {
+    var _createImage = function (imgPlaceholder, imgAttributes, onCreateCallback) {
         var img = document.createElement('img');
+
+        img.onload = function () {
+            if (!!onCreateCallback) {
+                onCreateCallback.call(img);
+            }
+        };
 
         for (var attr in imgAttributes) {
             img.setAttribute(imgAttributes[attr].name, imgAttributes[attr].value);
@@ -51,10 +57,11 @@
         return options || {};
     };
 
-    var lazyLoad = function (imgPlaceholder) {
+    var lazyLoad = function (imgPlaceholder, options) {
         var imgAttributes = _resolveImageAttributes(imgPlaceholder);
+        options = _validateOptions(options);
 
-        _createImage(imgPlaceholder, imgAttributes);
+        _createImage(imgPlaceholder, imgAttributes, options.onCreateCallback);
     };
 
     var _isVisible = function (placeholder, optionalThreshold) {
@@ -83,7 +90,7 @@
     var registerLazyLoad = function (imgPlaceholder, options) {
         var validatedOptions = _validateOptions(options);
         if (_isVisible(imgPlaceholder, validatedOptions.threshold)) {
-            lazyLoad(imgPlaceholder);
+            lazyLoad(imgPlaceholder, options);
         } else {
             var loadImgIfVisible = _loadImgIfVisible(imgPlaceholder, validatedOptions);
             if (window.addEventListener) {
