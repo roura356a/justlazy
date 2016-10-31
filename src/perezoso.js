@@ -1,5 +1,5 @@
 /**
- * perezoso 1.0.3
+ * perezoso 1.0.4
  * Repo: https://github.com/roura356a/perezoso
  */
 
@@ -14,51 +14,16 @@
 }(this, function () {
     'use strict';
 
-    /**
-     * Creates an img html node and sets the attributes of the
-     * image. The placeholder will be replaced by the generated
-     * image.
-     *
-     * @param {Object} imgPlaceholder Placeholder element of the img to lazy load.
-     * @param {Object} imgAttributes Attributes of the image which will be created.
-     * @param {Function} onloadCallback Optional onload callback function.
-     *
-     */
-    var _createImage = function (imgPlaceholder, imgAttributes, onloadCallback) {
+    var _createImage = function (imgPlaceholder, imgAttributes) {
         var img = document.createElement('img');
 
-        img.onload = function () {
-            if (!!onloadCallback) {
-                onloadCallback.call(img);
-            }
-        };
-        if (!!imgAttributes.title) {
-            img.title = imgAttributes.title;
+        for (var attr in imgAttributes) {
+            img.setAttribute(imgAttributes[attr].name, imgAttributes[attr].value);
         }
-        if (!!imgAttributes.errorHandler) {
-            img.setAttribute('onerror', imgAttributes.errorHandler);
-        }
-        if (!!imgAttributes.srcset) {
-            img.setAttribute('srcset', imgAttributes.srcset);
-        }
-        if (!!imgAttributes.class) {
-            img.setAttribute('class', imgAttributes.class);
-        }
-        if (!!imgAttributes.sizes) {
-            img.setAttribute('sizes', imgAttributes.sizes);
-        }
-        img.alt = imgAttributes.alt;
-        img.src = imgAttributes.src;
 
         _replacePlaceholderWithImage(imgPlaceholder, img);
     };
 
-    /**
-     * Replaces the img placeholder (html node of any type) with the img.
-     *
-     * @param {Object} imgPlaceholder Image placeholder html node.
-     * @param {Object} img Image node itself.
-     */
     var _replacePlaceholderWithImage = function (imgPlaceholder, img) {
         var parentNode = imgPlaceholder.parentNode;
         if (!!parentNode) {
@@ -66,54 +31,30 @@
         }
     };
 
-    /**
-     * Reads out the relevant attributes of the imagePlaceholder.
-     *
-     * @param {Object} imgPlaceholder Lazy image placeholder which holds image attributes.
-     *
-     * @returns {Object} Object with image attributes.
-     */
     var _resolveImageAttributes = function (imgPlaceholder) {
-        return {
-            src: imgPlaceholder.getAttribute('data-src'),
-            class: imgPlaceholder.getAttribute('data-class'),
-            sizes: imgPlaceholder.getAttribute('data-sizes'),
-            alt: imgPlaceholder.getAttribute('data-alt'),
-            title: imgPlaceholder.getAttribute('data-title'),
-            errorHandler: imgPlaceholder.getAttribute('data-error-handler'),
-            srcset: imgPlaceholder.getAttribute('data-srcset')
-        };
+        var attributes = imgPlaceholder.attributes,
+            imgAttributes = {};
+
+        for (var attr in attributes) {
+            if (/^data-/.test(attributes[attr].name)) {
+                imgAttributes[attributes[attr].name] = {
+                    name: attributes[attr].name.substr(5),
+                    value: attributes[attr].value
+                };
+            }
+        }
+
+        return imgAttributes;
     };
 
     var _validateOptions = function (options) {
         return options || {};
     };
 
-    /**
-     * Lazy loads image with img tag.
-     *
-     * @param {Object} imgPlaceholder The placeholder is a html node of any type (e.g. a span element).
-     *                                The node has to provide the data element data-src and data-alt.
-     *                                All other attributes are optional.
-     * @param {Object} options Optional object with following attributes:
-     *                           - onloadCallback:
-     *                                 Optional callback which is invoked after the image is loaded.
-     *                           - onerrorCallback:
-     *                                 Optional error handler which is invoked if the
-     *                                 replacement of the lazy placeholder fails (e.g. mandatory
-     *                                 attributes missing).
-     */
-    var lazyLoad = function (imgPlaceholder, options) {
+    var lazyLoad = function (imgPlaceholder) {
         var imgAttributes = _resolveImageAttributes(imgPlaceholder);
-        options = _validateOptions(options);
 
-        if (!!imgAttributes.src && (!!imgAttributes.alt || imgAttributes.alt === '')) {
-            _createImage(imgPlaceholder, imgAttributes, options.onloadCallback);
-        } else {
-            if (!!options.onerrorCallback) {
-                options.onerrorCallback.call(imgPlaceholder);
-            }
-        }
+        _createImage(imgPlaceholder, imgAttributes);
     };
 
     var _isVisible = function (placeholder, optionalThreshold) {
@@ -126,7 +67,7 @@
     var _loadImgIfVisible = function (imgPlaceholder, options) {
         var scrollEventCallback = function (e) {
             if (_isVisible(imgPlaceholder, options.threshold)) {
-                lazyLoad(imgPlaceholder, options);
+                lazyLoad(imgPlaceholder);
 
                 if (window.removeEventListener) {
                     window.removeEventListener(e.type, scrollEventCallback, false);
@@ -139,28 +80,10 @@
         return scrollEventCallback;
     };
 
-    /**
-     * Registers the lazy loading event. If the image become visible, it will
-     * be loaded automatically.
-     *
-     * @param {Object} imgPlaceholder The placeholder is a html node of any type (e.g. a span element).
-     *                                The node has to provide the data element data-src and data-alt.
-     *                                All other attributes are optional.
-     * @param {Object} options Optional object with following attributes:
-     *                           - onloadCallback:
-     *                                 Optional callback which is invoked after the image is loaded.
-     *                           - onerrorCallback:
-     *                                 Optional error handler which is invoked if the
-     *                                 replacement of the lazy placeholder fails (e.g. mandatory
-     *                                 attributes missing).
-     *                           - threshold:
-     *                                 The image is loaded the defined pixels before it appears
-     *                                 on the screen. E.g. 200px before it become visible.
-     */
     var registerLazyLoad = function (imgPlaceholder, options) {
         var validatedOptions = _validateOptions(options);
         if (_isVisible(imgPlaceholder, validatedOptions.threshold)) {
-            lazyLoad(imgPlaceholder, options);
+            lazyLoad(imgPlaceholder);
         } else {
             var loadImgIfVisible = _loadImgIfVisible(imgPlaceholder, validatedOptions);
             if (window.addEventListener) {

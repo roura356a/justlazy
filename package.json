@@ -3,7 +3,7 @@
   "main": "src/perezoso.js",
   "author": "Alberto Roura",
   "description": "Perezoso is a lightweight javascript plugin to lazy load images.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/roura356a/perezoso",
   "repository": {
     "type": "git",
