@@ -20,7 +20,7 @@ You can download the latest [release](https://github.com/roura356a/perezoso/rele
 
 ### NPM
 ```
-$ npm install roura356a/perezoso
+$ npm install perezoso
 ```
 
 ## Documentation
