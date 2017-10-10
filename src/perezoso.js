@@ -1,5 +1,5 @@
 /**
- * perezoso 1.0.5
+ * perezoso 1.0.6
  * Repo: https://github.com/roura356a/perezoso
  */
 
@@ -17,15 +17,11 @@
     var _createImage = function (imgPlaceholder, imgAttributes, onCreateCallback) {
         var img = document.createElement('img');
 
-        img.onload = function () {
-            if (!!onCreateCallback) {
-                onCreateCallback.call(img);
-            }
-        };
-
         for (var attr in imgAttributes) {
             img.setAttribute(imgAttributes[attr].name, imgAttributes[attr].value);
         }
+
+        img.onload = onCreateCallback;
 
         _replacePlaceholderWithImage(imgPlaceholder, img);
     };
@@ -74,7 +70,7 @@
     var _loadImgIfVisible = function (imgPlaceholder, options) {
         var scrollEventCallback = function (e) {
             if (_isVisible(imgPlaceholder, options.threshold)) {
-                lazyLoad(imgPlaceholder);
+                lazyLoad(imgPlaceholder, options);
 
                 if (window.removeEventListener) {
                     window.removeEventListener(e.type, scrollEventCallback, false);
