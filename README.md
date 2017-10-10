@@ -1,4 +1,4 @@
-# perezoso.js (v1.0.7)
+# perezoso.js (v1.1.0)
 
 Perezoso is a lightweight javascript plugin to lazy load responsive images forked from [fhopeman/justlazy](https://github.com/fhopeman/justlazy).
 
@@ -81,13 +81,13 @@ Perezoso.registerLazyLoadByClass('load-if-visible', {
 });
 ```
 
-##### onCreateCallback
-The `onCreateCallback` option is optional. When the new image is created, the function defined here is called.
+##### onLoadCallback
+The `onLoadCallback` option is optional. When the new image is created and loaded, the function defined here is called.
 
 Example:
 ```
 Perezoso.registerLazyLoadByClass('load-if-visible', {
-    onCreateCallback: function() {
+    onLoadCallback: function() {
         console.log('image loaded!');
     }
 });

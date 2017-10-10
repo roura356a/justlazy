@@ -1,5 +1,5 @@
 /**
- * perezoso 1.0.7
+ * perezoso 1.1.0
  * Repo: https://github.com/roura356a/perezoso
  */
 
@@ -14,14 +14,14 @@
 }(this, function () {
     'use strict';
 
-    var _createImage = function (imgPlaceholder, imgAttributes, onCreateCallback) {
+    var _createImage = function (imgPlaceholder, imgAttributes, onLoadCallback) {
         var img = document.createElement('img');
 
         for (var attr in imgAttributes) {
             img.setAttribute(imgAttributes[attr].name, imgAttributes[attr].value);
         }
 
-        img.onload = onCreateCallback;
+        img.onload = onLoadCallback;
 
         _replacePlaceholderWithImage(imgPlaceholder, img);
     };
@@ -57,7 +57,7 @@
         var imgAttributes = _resolveImageAttributes(imgPlaceholder);
         options = _validateOptions(options);
 
-        _createImage(imgPlaceholder, imgAttributes, options.onCreateCallback);
+        _createImage(imgPlaceholder, imgAttributes, options.onLoadCallback);
     };
 
     var _isVisible = function (placeholder, optionalThreshold) {
